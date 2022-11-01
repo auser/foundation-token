@@ -2,7 +2,7 @@
   "name": "@auser/foundation-token",
   "version": "0.1.0",
   "scripts": {
-    "prepare": "node ./.setup.js && hardhat typechain",
+    "prepare": "hardhat typechain",
     "format": "prettier --check \"**/*.{ts,js,sol}\"",
     "format:fix": "prettier --write \"**/*.{ts,js,sol}\"",
     "compile": "hardhat compile",
@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.3",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",

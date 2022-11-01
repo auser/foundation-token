@@ -1,11 +1,10 @@
 import "@nomicfoundation/hardhat-toolbox";
-import { HardhatUserConfig } from "hardhat/config";
-
 import "@nomiclabs/hardhat-ethers";
 import "@typechain/hardhat";
 import "dotenv/config";
 import "hardhat-deploy";
 import "hardhat-gas-reporter";
+import { HardhatUserConfig } from "hardhat/config";
 import "solidity-coverage";
 import { accounts, addForkConfiguration, node_url } from "./utils/network";
 
@@ -39,9 +38,6 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: 0,
   },
-  paths: {
-    sources: "src",
-  },
   gasReporter: {
     currency: "USD",
     gasPrice: 100,
@@ -49,6 +45,16 @@ const config: HardhatUserConfig = {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     maxMethodDiff: 10,
   },
+  external: process.env.HARDHAT_FORK
+    ? {
+        deployments: {
+          // process.env.HARDHAT_FORK will specify the network that the fork is made from.
+          // these lines allow it to fetch the deployments from the network being forked from both for node and deploy task
+          hardhat: ["deployments/" + process.env.HARDHAT_FORK],
+          localhost: ["deployments/" + process.env.HARDHAT_FORK],
+        },
+      }
+    : undefined,
   typechain: {
     outDir: "typechain",
     target: "ethers-v5",
